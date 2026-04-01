@@ -23,6 +23,17 @@ setmetatable(const, {
     __call = function(t, v) return L.org(v) end
 })
 
+arr = {}
+
+setmetatable(arr, { 
+    __mul = function(_, v)   return {}   end,
+    __concat = function(_, v)   return {}   end,
+    __add = function(_, v)   return {}   end,
+    __sub = function(_, v)   return {}   end,
+    __div = function(_, v)   return {}   end,
+    __call = function(t, v)   return {}   end
+})
+
 __int64 = {}
 
 setmetatable(__int64, { 
@@ -94,12 +105,28 @@ setmetatable(type, {
     __div = function(_, v) return type.org(v) end,
     __call = function(t, v) return type.org(v) end
 })
-local onStack = {}
+local onStack = arr* (__array)
+onStack.stkVal = __int64* (0)
+function pushdata(env, _name)
+    onStack[_name] = env[_name]
+    onStack.stkVal = (__int64* (onStack.stkVal)) + 1
+end
+
 function getglobal(env, _name)
-  onStack[_name] = 
+  pushdata(env, L*(_name))
   return env[_name]
 end
 
+function free(_name, env)
+    if not env then
+        return
+    end
+    env = L* (env)
+    name = L* (_name)
+    onStack[name] = nil
+    onStack.stkVal = (__int64* (onStack.stkVal)) - 1
+end
+
 function getstack(_name)
-  return onStack[_env]
+  return onStack[_name]
 end
