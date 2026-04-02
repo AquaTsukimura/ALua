@@ -46,12 +46,12 @@ setmetatable(arr64, {
 arr32 = {}
 
 setmetatable(arr32, { 
-    __mul = function(_, v)   return {is32 = false}   end,
-    __concat = function(_, v)   return {is32 = false}   end,
-    __add = function(_, v)   return {is32 = false}   end,
-    __sub = function(_, v)   return {is32 = false}   end,
-    __div = function(_, v)   return {is32 = false}  end,
-    __call = function(t, v)   return {is32 = false}   end
+    __mul = function(_, v)   return {is32 = true}   end,
+    __concat = function(_, v)   return {is32 = true}   end,
+    __add = function(_, v)   return {is32 = true}   end,
+    __sub = function(_, v)   return {is32 = true}   end,
+    __div = function(_, v)   return {is32 = true}  end,
+    __call = function(t, v)   return {is32 = true}   end
 })
 
 __int64 = {}
