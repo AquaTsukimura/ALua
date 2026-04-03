@@ -13,6 +13,23 @@ function lua.getglobal(name)
   end
 end
 function lua.loadbuffer(chunk, chunkname, size)
+  if type(chunk) ~= "string" then
+    return
+  elseif chunk == "" then
+    return
+  elseif (not chunk) then
+    return
+  end
+  if type(chunkname) ~= "string" then
+    return
+  elseif chunkname == "" then
+    chunkname = "=(@chunk)"
+  elseif (not chunkname) then
+    chunkname = "=(@chunk)"
+  end
+  if type(size) ~= "number" then
+    size = #chunk
+  end
   local newScript = {}
   for i = 1, size do
     newScript[i] = string.sub(chunk, i, i)
