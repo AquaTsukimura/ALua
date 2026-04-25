@@ -1,4 +1,5 @@
 --Symbols.lua
+-- by aqua tsukimura
 L = {org = function(v) return v end}
 
 setmetatable(L, { 
@@ -54,9 +55,9 @@ setmetatable(arr32, {
     __call = function(t, v)   return {is32 = true}   end
 })
 
-__int64 = {}
+__int64_t = {}
 
-setmetatable(__int64, { 
+setmetatable(__int64_t, { 
     __mul = function(_, v) local m = getmetatable(v) if m then m.__64Bit = true end return L.org(v) end,
     __concat = function(_, v) local m = getmetatable(v) if m then m.__64Bit = true end return L.org(v) end,
     __add = function(_, v) local m = getmetatable(v) if m then m.__64Bit = true end return L.org(v) end,
@@ -65,9 +66,9 @@ setmetatable(__int64, {
     __call = function(t, v) local m = getmetatable(v) if m then m.__64Bit = true end return L.org(v) end
 })
 
-__int32 = {}
+__int32_t = {}
 
-setmetatable(__int32, {
+setmetatable(__int32_t, {
     __mul = function(_, v) local m = getmetatable(v) if m then m.__32Bit = true end return L.org(v) end,
     __concat = function(_, v) local m = getmetatable(v) if m then m.__32Bit = true end return L.org(v) end,
     __add = function(_, v) local m = getmetatable(v) if m then m.__32Bit = true end return L.org(v) end,
